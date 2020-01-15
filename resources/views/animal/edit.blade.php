@@ -1,6 +1,22 @@
+@extends('layouts.app')
+@section('messages')
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Gyvuno redagavimas</div>
+                <div class="card-body">
+                    @if(session()->has('success_message'))
+    <div class="alert alert-success" role="alert">
+        {{session()->get('success_message')}}
+            </div>
+        @endif
 <form method="POST" action="{{route('animal.update',[$animal])}}">
     Name: <input type="text" name="animal_name" value="{{$animal->name}}">
     Birth year: <input type="text" name="animal_birth_year" value="{{$animal->birth_year}}">
+    <br>
+    <br>
     Animal book: <textarea name="animal_book">{{$animal->animal_book}}</textarea>
     <select name="specie_id">
         @foreach ($species as $specie)
@@ -18,5 +34,11 @@
     @endforeach
 </select>
     @csrf
-    <button type="submit">EDIT</button>
+    <button type="submit">Redaguoti</button>
 </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

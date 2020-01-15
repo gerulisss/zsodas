@@ -71,7 +71,12 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    @yield('messages')
+                </div>
+            </div></div>
         <main class="py-4">
             @yield('content')
         </main>

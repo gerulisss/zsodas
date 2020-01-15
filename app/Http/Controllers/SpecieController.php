@@ -39,7 +39,7 @@ class SpecieController extends Controller
         $specie = new Specie;
         $specie->name = $request->specie_name;
         $specie->save();
-        return redirect()->route('specie.index');
+        return redirect()->route('specie.index')->with('success_message', 'Nauja rusys '.$specie->name.' buvo prideta');
     }
 
     /**
@@ -75,7 +75,7 @@ class SpecieController extends Controller
     {
         $specie->name = $request->specie_name;
         $specie->save();
-        return redirect()->route('specie.index');
+        return redirect()->route('specie.index')->with('success_message', 'Rusies pavadinimas '.$specie->name.' buvo pakeistas');
     }
 
     /**
@@ -86,6 +86,15 @@ class SpecieController extends Controller
      */
     public function destroy(Specie $specie)
     {
+
+        if($specie->manager->count()){
+            return 'Trinti negalima, nes turi rusiu';
+        }
         $specie->delete();
+        return redirect()->route('specie.index');
+    }
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

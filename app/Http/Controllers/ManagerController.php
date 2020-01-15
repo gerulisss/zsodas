@@ -42,7 +42,7 @@ class ManagerController extends Controller
        $manager->surname = $request->manager_surname;
        $manager->specie_id = $request->specie_id;
        $manager->save();
-       return redirect()->route('manager.index');
+       return redirect()->route('manager.index')->with('success_message', 'Naujas priziuretojas '.$manager->name.' '.$manager->surname.' buvo pridetas');
     }
 
     /**
@@ -81,7 +81,7 @@ class ManagerController extends Controller
         $manager->surname = $request->manager_surname;
         $manager->specie_id = $request->specie_id;
         $manager->save();
-        return redirect()->route('manager.index');
+        return redirect()->route('manager.index')->with('success_message', 'Priziuretojo duomenys '.$manager->name.' '.$manager->surname.' sekmingai atnaujinti');
     }
 
     /**
@@ -92,6 +92,14 @@ class ManagerController extends Controller
      */
     public function destroy(Manager $manager)
     {
+        if($manager->specie->count()){
+            return 'Trinti negalima, nes turi rusiu';
+        }
         $manager->delete();
+        return redirect()->route('manager.index');
+    }
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

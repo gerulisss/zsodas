@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Animal;
 use Illuminate\Http\Request;
-use App\Specie;
 use App\Manager;
+use App\Specie;
 
 class AnimalController extends Controller
 {
@@ -47,7 +47,7 @@ class AnimalController extends Controller
         $animal->specie_id = $request->specie_id;
         $animal->manager_id = $request->manager_id;
         $animal->save();
-        return redirect()->route('animal.index');
+        return redirect()->route('animal.index')->with('success_message', 'Gyvunas '.$animal->name.' sekmingai sukurtas');
     }
 
     /**
@@ -89,7 +89,7 @@ class AnimalController extends Controller
         $animal->specie_id = $request->specie_id;
         $animal->manager_id = $request->manager_id;
         $animal->save();
-        return redirect()->route('animal.index');
+        return redirect()->route('animal.index')->with('success_message', 'Gyvuno duomenys '.$animal->name.' sekmingai atnaujinti');
     }
 
     /**
@@ -100,6 +100,15 @@ class AnimalController extends Controller
      */
     public function destroy(Animal $animal)
     {
+        if($animal->specie->count()){
+            return 'Trinti negalima, nes turi priziuretoju';
+        }
         $animal->delete();
+        return redirect()->route('animal.index');
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

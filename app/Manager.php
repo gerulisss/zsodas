@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Manager extends Model
 {
-    public function managerSpecie()
+    public function specie()
     {
-        return $this->belongsTo('App\Specie', 'specie_id', 'id');
+        return $this->belongsTo('App\Specie');
     }
 
     // public function getFullNameAttribute() {
