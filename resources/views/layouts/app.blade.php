@@ -49,6 +49,46 @@
                                 </li>
                             @endif
                         @else
+                         <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                                   Species
+                                                               </a>
+                                                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                                   <a class="dropdown-item" href="{{ route('specie.index') }}">
+                                                                       Species List
+                                                                   </a>
+                                                                   <a class="dropdown-item" href="{{ route('specie.create') }}">
+                                                                       New Specie
+                                                                   </a>
+                                                               </div>
+                                                           </li>
+                                                           <li class="nav-item dropdown">
+                                                               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                                   Managers
+                                                               </a>
+                                                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                                   <a class="dropdown-item" href="{{ route('manager.index') }}">
+                                                                       Managers List
+                                                                   </a>
+                                                                       <a class="dropdown-item" href="{{ route('manager.create') }}">
+                                                                       New Manager
+                                                                   </a>
+                                                               </div>
+                                                           </li>
+
+                                                           <li class="nav-item dropdown">
+                                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                                                Animals
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                                <a class="dropdown-item" href="{{ route('animal.index') }}">
+                                                                    Animals List
+                                                                </a>
+                                                                    <a class="dropdown-item" href="{{ route('animal.create') }}">
+                                                                    New Animal
+                                                                </a>
+                                                            </div>
+                                                        </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
