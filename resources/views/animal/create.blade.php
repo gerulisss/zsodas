@@ -7,11 +7,6 @@
             <div class="card">
                 <div class="card-header">Gyvuno sukurimas</div>
                 <div class="card-body">
-                    @if(session()->has('success_message'))
-    <div class="alert alert-success" role="alert">
-        {{session()->get('success_message')}}
-            </div>
-        @endif
 <form method="POST" action="{{route('animal.store')}}">
     Name: <input type="text" name="animal_name">
     Birth year: <input type="text" name="animal_birth_year">

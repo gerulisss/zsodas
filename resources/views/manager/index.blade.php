@@ -5,14 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Priziuretojai</div>
+                <div class="card-header">Priziuretoju sarasas</div>
                 <div class="card-body">
-
-                  @if(session()->has('success_message'))
-    <div class="alert alert-success" role="alert">
-        {{session()->get('success_message')}}
-    </div>
-@endif
 
 @foreach ($managers as $manager)
 <a href="{{route('manager.edit',[$manager])}}">

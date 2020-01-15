@@ -7,11 +7,6 @@
             <div class="card">
                 <div class="card-header">Priziuretojo redagavimas</div>
                 <div class="card-body">
-                    @if(session()->has('success_message'))
-    <div class="alert alert-success" role="alert">
-        {{session()->get('success_message')}}
-            </div>
-        @endif
                     <form method="POST" action="{{route('manager.update',[$manager])}}">
                         Name: <input type="text" name="manager_name" value="{{$manager->name}}">
                         Surname: <input type="text" name="manager_surname" value="{{$manager->surname}}">

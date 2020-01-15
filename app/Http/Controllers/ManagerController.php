@@ -93,7 +93,7 @@ class ManagerController extends Controller
     public function destroy(Manager $manager)
     {
         if($manager->specie->count()){
-            return 'Trinti negalima, nes turi rusiu';
+            return redirect()->route('manager.index')->with('info_message', 'Priziuretojo duomenu '.$manager->name. $manager->surname. ' Trinti negalima, nes turi rusiu');
         }
         $manager->delete();
         return redirect()->route('manager.index');

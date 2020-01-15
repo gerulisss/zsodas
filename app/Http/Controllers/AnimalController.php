@@ -101,7 +101,7 @@ class AnimalController extends Controller
     public function destroy(Animal $animal)
     {
         if($animal->specie->count()){
-            return 'Trinti negalima, nes turi priziuretoju';
+            return redirect()->route('animal.index')->with('info_message', 'Gyvuno duomenu '.$animal->name.' Trinti negalima, nes turi priziuretoju');
         }
         $animal->delete();
         return redirect()->route('animal.index');

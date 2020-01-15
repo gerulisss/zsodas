@@ -7,11 +7,6 @@
             <div class="card">
                 <div class="card-header">Gyvuno redagavimas</div>
                 <div class="card-body">
-                    @if(session()->has('success_message'))
-    <div class="alert alert-success" role="alert">
-        {{session()->get('success_message')}}
-            </div>
-        @endif
 <form method="POST" action="{{route('animal.update',[$animal])}}">
     Name: <input type="text" name="animal_name" value="{{$animal->name}}">
     Birth year: <input type="text" name="animal_birth_year" value="{{$animal->birth_year}}">
