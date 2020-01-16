@@ -9,9 +9,15 @@
                 <div class="card-body">
                     <form action="{{route('animal.index')}}" method="GET">
                         <select name="filter">
-                            <option value="0">Visi</option>
+                            <option value="0">Visi priziuretojai</option>
                             @foreach ($managers as $managers)
                             <option value="{{$managers->id}}" @if($managers->id == $filter){{'selected'}}@endif>{{$managers->name}} {{$managers->surname}}</option>
+                            @endforeach
+                        </select>
+                        <select name="filter">
+                            <option value="0">Visi ropliai</option>
+                            @foreach ($species as $species)
+                            <option value="{{$species->id}}" @if($species->id == $filter){{'selected'}}@endif>{{$species->name}}</option>
                             @endforeach
                         </select>
                         <select name="sort">

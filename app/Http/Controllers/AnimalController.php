@@ -22,6 +22,7 @@ class AnimalController extends Controller
 
         if($request->filter) {
             $animals = Animal::where('manager_id', $request->filter)->get();
+            $animals = Animal::where('specie_id', $request->filter)->get();
         }
         else {
             $animals = Animal::all();
@@ -46,9 +47,11 @@ class AnimalController extends Controller
 
 
         $managers = Manager::all();
+        $species = Specie::all();
         return view('animal.index', [
             'animals' => $animals,
             'managers' =>$managers,
+            'species' =>$species,
             'filter' => $request->filter ?? 0,
             'sortDef' => $request->sort ?? 'az',
             'sorts' => Animal::getSort()
