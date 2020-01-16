@@ -11,7 +11,7 @@
               <a href="{{route('specie.edit',[$specie])}}">{{$specie->name}}</a>
               <form method="POST" action="{{route('specie.destroy', [$specie])}}">
               @csrf
-              <button type="submit">Istrinti</button>
+              <button type="submit" class="btn btn-danger">Istrinti</button>
               </form>
               <br>
             @endforeach

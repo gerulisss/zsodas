@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Manager;
 use Illuminate\Http\Request;
 use App\Specie;
+use Validator;
 
 class ManagerController extends Controller
 {
@@ -37,6 +38,20 @@ class ManagerController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),
+        [
+        'manager_name' => ['required', 'min:3', 'max:64']
+        ],
+        [
+            'manager_name.required' => 'Prasome uzpildyti name laukeli'
+         ]
+        );
+        if ($validator->fails()) {
+        $request->flash();
+        return redirect()->route('manager.create')->withErrors($validator);
+
+        }
+        
         $manager = new Manager;
        $manager->name = $request->manager_name;
        $manager->surname = $request->manager_surname;

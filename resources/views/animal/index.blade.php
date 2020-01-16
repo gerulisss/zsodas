@@ -15,7 +15,7 @@
        {{$animal->manager->surname}}</a>
   <form method="POST" action="{{route('animal.destroy', [$animal])}}">
    @csrf
-   <button type="submit">Istrinti</button>
+   <button type="submit" class="btn btn-danger">Istrinti</button>
   </form>
   <br>
 @endforeach

@@ -6,6 +6,7 @@ use App\Animal;
 use Illuminate\Http\Request;
 use App\Manager;
 use App\Specie;
+use Validator;
 
 class AnimalController extends Controller
 {
@@ -40,6 +41,21 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(),
+        [
+        'animal_birth_year' => ['required', 'min:4', 'max:4']
+        ],
+        [
+            'animal_birth_year.required' => 'Prasome uzpildyti datos laukeli laukeli'
+         ]
+        );
+        if ($validator->fails()) {
+        $request->flash();
+        return redirect()->route('animal.create')->withErrors($validator);
+
+        }
+
         $managerb_id = $request->manager_id;
         $speciesb_id = $request->specie_id;
         $managerbp = Manager::find($managerb_id);

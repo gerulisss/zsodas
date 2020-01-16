@@ -18,7 +18,7 @@
                             @endforeach
                     </select>
                         @csrf
-                        <button type="submit">Redaguoti</button>
+                        <button type="submit" class="btn btn-success">Redaguoti</button>
                     </form>
                 </div>
             </div>

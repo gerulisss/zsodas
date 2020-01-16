@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Specie;
 use Illuminate\Http\Request;
+use Validator;
 
 class SpecieController extends Controller
 {
@@ -36,6 +37,21 @@ class SpecieController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(),
+        [
+        'specie_name' => ['required', 'min:3', 'max:64']
+        ],
+        [
+            'specie_name.required' => 'Prasome uzpildyti name laukeli'
+         ]
+        );
+        if ($validator->fails()) {
+        $request->flash();
+        return redirect()->route('specie.create')->withErrors($validator);
+
+        }
+
         $specie = new Specie;
         $specie->name = $request->specie_name;
         $specie->save();
