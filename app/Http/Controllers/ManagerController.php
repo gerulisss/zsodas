@@ -17,6 +17,7 @@ class ManagerController extends Controller
     {
         $managers = Manager::all();
        return view('manager.index', ['managers' => $managers]);
+
     }
 
     /**

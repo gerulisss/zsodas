@@ -12,7 +12,7 @@
 <a href="{{route('manager.edit',[$manager])}}">
   {{$manager->name}}
   {{$manager->surname}} 
-   {{$manager->specie->name}}</a>
+  priziuri rusi: {{$manager->specie->name}}</a>
   <form method="POST" action="{{route('manager.destroy', [$manager])}}">
    @csrf
    <button type="submit" class="btn btn-danger">Istrinti</button>

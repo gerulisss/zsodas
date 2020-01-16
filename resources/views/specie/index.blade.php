@@ -8,7 +8,7 @@
                 <div class="card-header">Gyvunu rusiu sarasas</div>
                 <div class="card-body">
                 @foreach ($species as $specie)
-              <a href="{{route('specie.edit',[$specie])}}">{{$specie->name}}</a>
+             Rusis: <a href="{{route('specie.edit',[$specie])}}">{{$specie->name}}</a>
               <form method="POST" action="{{route('specie.destroy', [$specie])}}">
               @csrf
               <button type="submit" class="btn btn-danger">Istrinti</button>

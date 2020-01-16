@@ -15,10 +15,44 @@ class AnimalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $animals = Animal::all();
-        return view('animal.index', ['animals' => $animals]);
+        // $animals = Animal::all();
+        // return view('animal.index', ['animals' => $animals]);
+
+        if($request->filter) {
+            $animals = Animal::where('manager_id', $request->filter)->get();
+        }
+        else {
+            $animals = Animal::all();
+        }
+
+        if($request->sort) {
+            if($request->sort == 'az') { 
+                $animals = $animals->sortBy('title');
+            }
+            elseif($request->sort == 'za') { 
+                $animals = $animals->sortByDesc('title');
+            }
+            elseif ($request->sort == 'azt') {
+                $animals = $animals->sortByDesc('created_at');
+            }
+            elseif ($request->sort == 'zat') {
+                $animals = $animals->sortBy('created_at');
+            }
+
+
+        }
+
+
+        $managers = Manager::all();
+        return view('animal.index', [
+            'animals' => $animals,
+            'managers' =>$managers,
+            'filter' => $request->filter ?? 0,
+            'sortDef' => $request->sort ?? 'az',
+            'sorts' => Animal::getSort()
+            ]);
     }
 
     /**
@@ -110,6 +144,12 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
+        $managerb_id = $request->manager_id;
+        $speciesb_id = $request->specie_id;
+        $managerbp = Manager::find($managerb_id);
+        if ($managerbp->specie_id == $speciesb_id) {
+
+
         $animal->name = $request->animal_name;
         $animal->birth_year = $request->animal_birth_year;
         $animal->animal_book = $request->animal_book;
@@ -118,6 +158,10 @@ class AnimalController extends Controller
         $animal->save();
         return redirect()->route('animal.index')->with('success_message', 'Gyvuno duomenys '.$animal->name.' sekmingai atnaujinti');
     }
+else {
+  return redirect()->route('animal.index')->with('info_message', 'Pasirinktas blogai priziuretojas');
+    }
+}
 
     /**
      * Remove the specified resource from storage.
