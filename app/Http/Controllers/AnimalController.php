@@ -40,6 +40,12 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
+        $managerb_id = $request->manager_id;
+        $speciesb_id = $request->specie_id;
+        $managerbp = Manager::find($managerb_id);
+        if ($managerbp->specie_id == $speciesb_id) {
+
+
         $animal = new Animal;
         $animal->name = $request->animal_name;
         $animal->birth_year = $request->animal_birth_year;
@@ -49,6 +55,11 @@ class AnimalController extends Controller
         $animal->save();
         return redirect()->route('animal.index')->with('success_message', 'Gyvunas '.$animal->name.' sekmingai sukurtas');
     }
+  else {
+    return redirect()->route('animal.create')->with('info_message', 'Pasirinktas blogai priziuretojas');
+      }
+    }
+
 
     /**
      * Display the specified resource.
@@ -100,11 +111,8 @@ class AnimalController extends Controller
      */
     public function destroy(Animal $animal)
     {
-        if($animal->specie->count()){
-            return redirect()->route('animal.index')->with('info_message', 'Gyvuno duomenu '.$animal->name.' Trinti negalima, nes turi priziuretoju');
-        }
         $animal->delete();
-        return redirect()->route('animal.index');
+        return redirect()->route('animal.index')->with('info_message', 'Gyvunas '.$animal->name.' Sekmingai istrintas');
     }
 
     public function __construct()

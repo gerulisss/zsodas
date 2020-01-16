@@ -87,11 +87,18 @@ class SpecieController extends Controller
     public function destroy(Specie $specie)
     {
 
-        if($specie->manager->count()){
-            return 'Trinti negalima, nes turi rusiu';
-        }
+    if(!$specie->manager->count() && !$specie->animal->count()) {
         $specie->delete();
-        return redirect()->route('specie.index');
+    }
+    else {
+        if($specie->manager->count() && !$specie->animal->count()) {
+            return redirect()->route('specie.index', ['manager', $specie])->with('info_message', 'Trinti negalima, nes turi priziuretoja');
+        }
+        return redirect()->route('specie.index', ['animal', $specie])->with('info_message', 'Trinti negalima, nes turi gyvunu');
+    }
+    return redirect()->route('specie.index')->with('success_message', 'Species '.$specie->name.' was deleted!');
+
+
     }
     public function __construct()
     {

@@ -45,6 +45,8 @@ class ManagerController extends Controller
        return redirect()->route('manager.index')->with('success_message', 'Naujas priziuretojas '.$manager->name.' '.$manager->surname.' buvo pridetas');
     }
 
+
+
     /**
      * Display the specified resource.
      *
@@ -92,11 +94,16 @@ class ManagerController extends Controller
      */
     public function destroy(Manager $manager)
     {
-        if($manager->specie->count()){
-            return redirect()->route('manager.index')->with('info_message', 'Priziuretojo duomenu '.$manager->name. $manager->surname. ' Trinti negalima, nes turi rusiu');
+        if(!$manager->animal->count()) {
+            $manager->delete();
         }
-        $manager->delete();
-        return redirect()->route('manager.index');
+        else {
+            if($manager->animal->count()) {
+                return redirect()->route('manager.index', ['animal', $manager])->with('info_message', 'Negalima trinti, nes turi gyvunu');
+            }
+        }
+        return redirect()->route('manager.index')->with('success_message', 'Priziuretojas '.$manager->name.' sekmingai istrintas');
+
     }
     public function __construct()
     {
