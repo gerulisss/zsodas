@@ -13,11 +13,26 @@ class ManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $managers = Manager::all();
-       return view('manager.index', ['managers' => $managers]);
+    //     $managers = Manager::all();
+    //    return view('manager.index', ['managers' => $managers]);
 
+    if($request->filter) {
+        $managers = Manager::where('specie_id', $request->filter)->get();
+    }
+    else {
+        $managers = Manager::all();
+    }
+
+
+    $species = Specie::all();
+    return view('manager.index', [
+        'species' => $species,
+        'managers' => $managers,
+        'filter' => $request->filter ?? 0,
+        'sortDef' => $request->sort ?? 'az',
+        ]);
     }
 
     /**

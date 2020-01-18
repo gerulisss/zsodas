@@ -14,31 +14,26 @@
                             <option value="{{$managers->id}}" @if($managers->id == $filter){{'selected'}}@endif>{{$managers->name}} {{$managers->surname}}</option>
                             @endforeach
                         </select>
-                        <select name="filter">
-                            <option value="0">Visi ropliai</option>
-                            @foreach ($species as $species)
-                            <option value="{{$species->id}}" @if($species->id == $filter){{'selected'}}@endif>{{$species->name}}</option>
-                            @endforeach
-                        </select>
                         <select name="sort">
                             @foreach ($sorts as $sort)
                             <option value="{{$sort->value}}" @if($sort->value == $sortDef){{'selected'}}@endif>{{$sort->text}}</option>
                             @endforeach
                         </select>
-                        <button class="btn btn-success" type="submit">GERAI</button>
-                        <a class="btn btn-danger" href="{{route('animal.index')}}">Isvalyti</a>
+                        <button class="btn btn-success btn-sm" type="submit">GERAI</button>
+                        <a class="btn btn-danger btn-sm" href="{{route('animal.index')}}">Isvalyti</a>
                         </form>
+                        <br>
 @foreach ($animals as $animal)
-  <a href="{{route('animal.edit',[$animal])}}">
-    {{$animal->name}}
-</a>
      {{-- {{$animal->specie->name}}
       {{$animal->manager->name}}
        {{$animal->manager->surname}} --}}
-       Atnaujinta: {{$animal->updated_at}}
-  <form method="POST" action="{{route('animal.destroy', [$animal])}}">
-   @csrf
-   <button type="submit" class="btn btn-danger">Istrinti</button>
+       <form method="POST" action="{{route('animal.destroy', [$animal])}}">
+        @csrf
+        <a href="{{route('animal.edit',[$animal])}}">
+            {{$animal->name}}
+        </a>
+        Atnaujinta: {{$animal->updated_at}}
+   <button type="submit" class="btn btn-danger btn-sm">Istrinti</button>
   </form>
   <br>
 @endforeach

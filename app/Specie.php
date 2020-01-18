@@ -17,4 +17,5 @@ class Specie extends Model
             return $this->hasMany('App\Animal','specie_id', 'id');
         }
 
+
 }
