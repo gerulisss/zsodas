@@ -10,7 +10,7 @@
 <form method="POST" action="{{route('animal.store')}}">
     Name: <input type="text" name="animal_name" class="form-control">
     Birth year: <input type="text" name="animal_birth_year" value="{{old('animal_birth_year')}}" class="form-control">
-    Animal book: <textarea name="animal_book" class="form-control"></textarea>
+    Animal book: <textarea name="animal_book" class="form-control" id="summernote"></textarea>
     Select specie: <select name="specie_id" class="selectpicker form-control">
         @foreach ($species as $specie)
             <option value="{{$specie->id}}">{{$specie->name}}</option>
@@ -31,4 +31,23 @@
         </div>
     </div>
 </div>
+<script>
+    // $(document).ready(function() {
+    // $('#summernote').summernote();
+    // });
+    $("#summernote").summernote({
+    height: 200,
+    toolbar: [
+        [ 'style', [ 'style' ] ],
+        [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+        [ 'fontname', [ 'fontname' ] ],
+        [ 'fontsize', [ 'fontsize' ] ],
+        [ 'color', [ 'color' ] ],
+        [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+        [ 'table', [ 'table' ] ],
+        [ 'insert', [ 'link'] ],
+        [ 'view', [ 'undo', 'redo', 'fullscreen', 'help' ] ]
+    ]
+});
+    </script>
 @endsection

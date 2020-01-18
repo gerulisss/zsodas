@@ -10,7 +10,7 @@
 <form method="POST" action="{{route('animal.update',[$animal])}}">
     Name: <input type="text" name="animal_name" class="form-control" value="{{$animal->name}}">
     Birth year: <input type="text" name="animal_birth_year" class="form-control" value="{{$animal->birth_year}}">
-    Animal book: <textarea name="animal_book" class="form-control">{{$animal->animal_book}}</textarea>
+    Animal book: <textarea name="animal_book" class="form-control" id="summernote">{{$animal->animal_book}}</textarea>
     Select specie: <select name="specie_id" class="selectpicker form-control">
         @foreach ($species as $specie)
             <option value="{{$specie->id}}" @if($specie->id == $animal->specie_id) selected @endif>
@@ -35,4 +35,23 @@ Select manager: <select name="manager_id" class="selectpicker form-control">
         </div>
     </div>
 </div>
+<script>
+    // $(document).ready(function() {
+    // $('#summernote').summernote();
+    // });
+    $("#summernote").summernote({
+    height: 200,
+    toolbar: [
+        [ 'style', [ 'style' ] ],
+        [ 'font', [ 'bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear'] ],
+        [ 'fontname', [ 'fontname' ] ],
+        [ 'fontsize', [ 'fontsize' ] ],
+        [ 'color', [ 'color' ] ],
+        [ 'para', [ 'ol', 'ul', 'paragraph', 'height' ] ],
+        [ 'table', [ 'table' ] ],
+        [ 'insert', [ 'link'] ],
+        [ 'view', [ 'undo', 'redo', 'fullscreen', 'help' ] ]
+    ]
+});
+    </script>
 @endsection

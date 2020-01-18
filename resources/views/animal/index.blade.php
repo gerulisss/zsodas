@@ -21,8 +21,8 @@
                             <option value="{{$sort->value}}" @if($sort->value == $sortDef){{'selected'}}@endif>{{$sort->text}}</option>
                             @endforeach
                         </select>
-                        <button class="btn btn-success btn-sm" type="submit">GERAI</button>
-                        <a class="btn btn-danger btn-sm" href="{{route('animal.index')}}">Isvalyti</a>
+                        <button class="btn btn-success btn-sm" type="submit">Rušiuoti</button>
+                        <a class="btn btn-danger btn-sm" href="{{route('animal.index')}}">Išvalyti</a>
                         </form>
                         <br>
 @foreach ($animals as $animal)
@@ -32,9 +32,10 @@
        <form method="POST" action="{{route('animal.destroy', [$animal])}}">
         @csrf
         <a href="{{route('animal.edit',[$animal])}}">
+            <a style="text-decoration:none;" href="{{route('animal.show',[$animal])}}">
             {{$animal->name}}
         </a>
-        Atnaujinta: {{$animal->updated_at}}
+        Atnaujinta: {{$animal->created_at}}
     <a style="text-decoration:none;" href="{{route('animal.edit',[$animal])}}"><button type="button" class="btn btn-primary btn-sm">Redaguoti</button></a>
    <button type="submit" class="btn btn-danger btn-sm">Ištrinti</button>
   </form>

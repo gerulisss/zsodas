@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Manager;
 use App\Specie;
 use Validator;
+use PDF;
 
 class AnimalController extends Controller
 {
@@ -119,7 +120,7 @@ class AnimalController extends Controller
      */
     public function show(Animal $animal)
     {
-        //
+        return view('animal.show', ['animal' => $animal]);
     }
 
     /**
@@ -178,5 +179,11 @@ else {
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function pdf(Animal $animal)
+    {
+        $pdf = PDF::loadView('animal.pdf', ['animal' => $animal]);
+        return $pdf->download($animal->name.'.pdf');
     }
 }
