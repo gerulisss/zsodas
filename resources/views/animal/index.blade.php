@@ -5,11 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Gyvunu sarasas</div>
+                <div class="card-header">Gyvūnų sąrašas
+                    <a class="btn btn-primary btn-sm" href="{{route('animal.create')}}">Sukurti nauja</a>
+                </div>
                 <div class="card-body">
                     <form action="{{route('animal.index')}}" method="GET">
                         <select name="filter">
-                            <option value="0">Visi priziuretojai</option>
+                            <option value="0">Visi prižiurėtojai</option>
                             @foreach ($managers as $managers)
                             <option value="{{$managers->id}}" @if($managers->id == $filter){{'selected'}}@endif>{{$managers->name}} {{$managers->surname}}</option>
                             @endforeach
@@ -33,7 +35,8 @@
             {{$animal->name}}
         </a>
         Atnaujinta: {{$animal->updated_at}}
-   <button type="submit" class="btn btn-danger btn-sm">Istrinti</button>
+    <a style="text-decoration:none;" href="{{route('animal.edit',[$animal])}}"><button type="button" class="btn btn-primary btn-sm">Redaguoti</button></a>
+   <button type="submit" class="btn btn-danger btn-sm">Ištrinti</button>
   </form>
   <br>
 @endforeach
